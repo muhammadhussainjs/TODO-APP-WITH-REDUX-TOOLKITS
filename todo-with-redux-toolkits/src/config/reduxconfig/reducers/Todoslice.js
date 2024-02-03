@@ -2,29 +2,32 @@
 import {createSlice , nanoid} from '@reduxjs/toolkit'
 
 export const todoSlice = createSlice({
-    name:'todos',
-    initialstate:{
-        todos:[{
-            title:'hello world',
-            id: 1
+    name:'Todos',
+    initialState:{
+        todos:[
 
-        }]
+        ],
+    
 
     },
     reducers:{
-        addtodo:(state , action)=>{
+        addTodo:(state , action)=>{
             state.todos.push({
-                tltle:action.payload.title,
-                id: nanoid()
+                title:action.payload.title,
+                
             })
 
         },
-        removetodo:(state , action )=>{
+        removeTodo:(state , action )=>{
             state.todos.splice(action.payload.index , 1)
+        }, 
+        editTodo:(state , action)=>{
+            const newvalue = prompt('enter new todo')
+            state.todos[action.payload.index].title = newvalue
         }
     }
 
 })
-export const {addtodo , removetodo } = todoSlice.actions
+export const {addTodo , removeTodo , editTodo } = todoSlice.actions
 export default todoSlice.reducer
 
